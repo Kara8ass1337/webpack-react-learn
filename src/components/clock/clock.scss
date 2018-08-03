@@ -1,0 +1,10 @@
+.clock {
+  margin-top: 10rem;
+  font-size: 2rem;
+
+  h1 {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
