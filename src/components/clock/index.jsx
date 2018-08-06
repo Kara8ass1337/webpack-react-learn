@@ -90,9 +90,15 @@ export default class Clock extends React.Component {
           onMouseLeave={this.handleMouseHover}>
           Date now is
         </h1>
-        <div>{this.getTime()}</div>
-        <div>{this.getDate()}</div>
-        <Button bsStyle="success" style={btnStyle} onClick={this.handleClick}>Touch me</Button>
+        <div>
+          {this.getTime()}
+        </div>
+        <div>
+          {this.getDate()}
+        </div>
+        <Button bsStyle="success" style={btnStyle} onClick={this.handleClick}>
+          Touch me
+        </Button>
       </div>
     );
   }
