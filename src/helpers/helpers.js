@@ -33,6 +33,8 @@ export function getRandomColor() {
 }
 
 export function getArrayWithUniqueItems(length) {
+  if (length < 1) return [];
+
   const arr = [];
 
   for (let i = 0; i <= length; i++) {
