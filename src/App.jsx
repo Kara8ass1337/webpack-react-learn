@@ -1,8 +1,28 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
 import Clock from './components/clock/clock';
-import JustText from './components/justText/justText';
-import {getRandomColor} from './helpers/helpers';
+import PassDataBtwComponentsLearn from './components/PassDataBtwComponentsLearn/PassDataBtwComponentsLearn';
+import { getRandomColor } from './helpers/helpers';
+import News from './components/news/news';
+
+const myNews = [
+  {
+    author: 'Саша Печкин',
+    text: 'В четверг, четвертого числа...',
+  },
+  {
+    author: 'Просто Вася',
+    text: 'Считаю, что $ должен стоить 35 рублей!',
+  },
+  {
+    author: 'Max Frontend',
+    text: 'Прошло 2 года с прошлых учебников, а $ так и не стоит 35',
+  },
+  {
+    author: 'Гость',
+    text: 'Бесплатно. Без смс, про реакт, заходи - https://maxpfrontend.ru',
+  },
+];
 
 class App extends Component {
   constructor(props) {
@@ -33,7 +53,8 @@ class App extends Component {
     return (
       <React.Fragment>
         <Clock updateData={this.updateData} />
-        <JustText color={justTextColor} />
+        <PassDataBtwComponentsLearn color={justTextColor} />
+        <News news={myNews} />
       </React.Fragment>
     );
   }

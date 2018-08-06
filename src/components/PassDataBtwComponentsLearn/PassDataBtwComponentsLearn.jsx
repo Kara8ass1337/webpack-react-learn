@@ -1,7 +1,7 @@
 import React from 'react';
-import style from './justText.scss';
+import style from './PassDataBtwComponentsLearn.scss';
 
-export default class JustText extends React.Component {
+export default class PassDataBtwComponentsLearn extends React.Component {
   constructor(props) {
     super(props);
 
