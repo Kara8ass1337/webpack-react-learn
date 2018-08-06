@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styles from './news.scss';
 
 export default class News extends Component {
@@ -49,3 +50,17 @@ export default class News extends Component {
     );
   }
 }
+
+News.propTypes = {
+  news: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      author: PropTypes.string,
+      text: PropTypes.string,
+    }),
+  ),
+};
+
+News.defaultProps = {
+  news: [],
+};

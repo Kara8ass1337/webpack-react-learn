@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import { alwaysTwoDigits } from 'helpers/helpers';
 import style from './clock.scss';
-import {getRandomColor} from '../../helpers/helpers';
+import { getRandomColor } from '../../helpers/helpers';
 
 export default class Clock extends React.Component {
   constructor(props) {
@@ -70,6 +71,7 @@ export default class Clock extends React.Component {
 
   handleClick() {
     const { btnStyle } = this.state;
+    const { updateData } = this.props;
     const nextTransform = btnStyle.transform === 'scaleX(-1)' ? 'scaleX(1)' : 'scaleX(-1)';
 
     this.setState({
@@ -79,7 +81,7 @@ export default class Clock extends React.Component {
       },
     });
 
-    this.props.updateData(getRandomColor());
+    updateData(getRandomColor());
   }
 
   render() {
@@ -106,3 +108,7 @@ export default class Clock extends React.Component {
     );
   }
 }
+
+Clock.propTypes = {
+  updateData: PropTypes.func,
+};
