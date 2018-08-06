@@ -4,6 +4,22 @@ import { alwaysTwoDigits } from 'helpers';
 import style from './clock.scss';
 
 export default class Clock extends React.Component {
+  static getRandomColor() {
+    const colors = [
+      'red',
+      'green',
+      'blue',
+      'yellow',
+      'deepskyblue',
+      'purple',
+      'lime',
+      'pink',
+    ];
+    const randomNumber = Math.floor(Math.random() * (colors.length - 1));
+
+    return colors[randomNumber];
+  }
+
   constructor(props) {
     super(props);
 
@@ -77,6 +93,8 @@ export default class Clock extends React.Component {
         transform: nextTransform,
       },
     });
+
+    this.props.updateData(Clock.getRandomColor());
   }
 
   render() {
