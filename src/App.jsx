@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
 import Clock from './components/clock/clock';
 import JustText from './components/justText/justText';
+import {getRandomColor} from './helpers/helpers';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      justTextColor: 'red',
+      justTextColor: getRandomColor(),
     };
 
     this.updateData = ::this.updateData;
@@ -23,11 +24,17 @@ class App extends Component {
   render() {
     const { justTextColor } = this.state;
 
+    /**
+     * тэг React.Fragment нужен для того,
+     * чтобы не выводить обёртку из div.
+     * выведится то, что находится
+     * внутри него, без него самого
+     */
     return (
-      <div>
+      <React.Fragment>
         <Clock updateData={this.updateData} />
         <JustText color={justTextColor} />
-      </div>
+      </React.Fragment>
     );
   }
 }

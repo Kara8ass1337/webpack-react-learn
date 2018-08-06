@@ -1,25 +1,10 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { alwaysTwoDigits } from 'helpers';
+import { alwaysTwoDigits } from 'helpers/helpers';
 import style from './clock.scss';
+import {getRandomColor} from '../../helpers/helpers';
 
 export default class Clock extends React.Component {
-  static getRandomColor() {
-    const colors = [
-      'red',
-      'green',
-      'blue',
-      'yellow',
-      'deepskyblue',
-      'purple',
-      'lime',
-      'pink',
-    ];
-    const randomNumber = Math.floor(Math.random() * (colors.length - 1));
-
-    return colors[randomNumber];
-  }
-
   constructor(props) {
     super(props);
 
@@ -94,7 +79,7 @@ export default class Clock extends React.Component {
       },
     });
 
-    this.props.updateData(Clock.getRandomColor());
+    this.props.updateData(getRandomColor());
   }
 
   render() {
