@@ -1,5 +1,5 @@
 {
-  "name": "@HashemKhalifa/webpack-react-boilerplate",
+  "name": "webpack-react-learn",
   "version": "1.0.0",
   "description": "Boilerplate for react and webpack",
   "main": "index.js",
@@ -33,8 +33,8 @@
       "jsx"
     ]
   },
-  "repository": "https://github.com/HashemKhalifa/webpack-react-boilerplate",
-  "author": "HashemKhalifa",
+  "repository": "https://github.com/Kara8ass1337/webpack-react-learn",
+  "author": "Oleg Shilov",
   "license": "ISC",
   "private": false,
   "engines": {
