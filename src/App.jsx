@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { hot } from 'react-hot-loader';
 import Clock from './components/clock/clock';
 import PassDataBtwComponentsLearn from './components/PassDataBtwComponentsLearn/PassDataBtwComponentsLearn';
 import { getArrayWithUniqueItems, getRandomColor } from './helpers/helpers';
 import News from './components/news/news';
+import TestInput from './components/testInput/testInput';
 
-class App extends Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
 
@@ -27,6 +28,8 @@ class App extends Component {
     this.setState({
       ...passDataBtwComponentsLearnColor,
       passDataBtwComponentsLearnColor: value,
+    }, () => {
+      // callback когда новое состояние установилось
     });
   }
 
@@ -75,6 +78,7 @@ class App extends Component {
       <React.Fragment>
         <Clock updateData={this.updateData} />
         <PassDataBtwComponentsLearn color={passDataBtwComponentsLearnColor} />
+        <TestInput />
         <News news={news} />
       </React.Fragment>
     );

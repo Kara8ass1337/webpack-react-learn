@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './news.scss';
 
-export default class News extends Component {
+export default class News extends React.Component {
   constructor(props) {
     super(props);
 
@@ -54,9 +54,9 @@ export default class News extends Component {
 News.propTypes = {
   news: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string,
-      author: PropTypes.string,
-      text: PropTypes.string,
+      id: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
     }),
   ),
 };
