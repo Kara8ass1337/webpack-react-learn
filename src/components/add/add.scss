@@ -1,0 +1,40 @@
+.add {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 0 5px 5px 0;
+  width: 210px;
+  border: 1px dashed rgba(0, 89, 181, 0.82);
+  padding: 5px;
+
+  .author {
+    width: 100%;
+  }
+
+  .text {
+    margin-top: 5px;
+    width: 100%;
+  }
+
+  .checkrule {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: none;
+    font-size: 12px;
+    line-height: 1;
+  }
+
+  .btn {
+    margin-top: 15px;
+    color: #FFF;
+    text-transform: uppercase;
+    background: #007DDC;
+
+    &:disabled {
+      background: #CCC;
+      color: #999;
+    }
+  }
+}

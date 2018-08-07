@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './PassDataBtwComponentsLearn.scss';
+import style from './passDataBtwComponentsLearn.scss';
 
 export default class PassDataBtwComponentsLearn extends React.Component {
   constructor(props) {

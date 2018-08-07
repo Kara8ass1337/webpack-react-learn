@@ -1,10 +1,10 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
 import Clock from './components/clock/clock';
-import PassDataBtwComponentsLearn from './components/PassDataBtwComponentsLearn/PassDataBtwComponentsLearn';
+import PassDataBtwComponentsLearn from './components/passDataBtwComponentsLearn/passDataBtwComponentsLearn';
 import { getArrayWithUniqueItems, getRandomColor } from './helpers/helpers';
 import News from './components/news/news';
-import TestInput from './components/testInput/testInput';
+import Add from './components/add/add';
 
 class App extends React.Component {
   constructor(props) {
@@ -78,7 +78,7 @@ class App extends React.Component {
       <React.Fragment>
         <Clock updateData={this.updateData} />
         <PassDataBtwComponentsLearn color={passDataBtwComponentsLearnColor} />
-        <TestInput />
+        <Add />
         <News news={news} />
       </React.Fragment>
     );
