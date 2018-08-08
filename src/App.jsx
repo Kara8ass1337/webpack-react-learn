@@ -6,43 +6,60 @@ import { getModifyArrayWithUniqueIds, getRandomColor } from './helpers/helpers';
 import News from './components/news/news';
 import Add from './components/add/add';
 
-const myNews = [
-  {
-    author: 'Саша Печкин',
-    text: 'В четверг, четвертого числа...',
-  },
-  {
-    author: 'Просто Вася',
-    text: 'Считаю, что $ должен стоить 35 рублей!',
-  },
-  {
-    author: 'Max Frontend',
-    text: 'Прошло 2 года с прошлых учебников, а $ так и не стоит 35',
-  },
-  {
-    author: 'Гость',
-    text: 'Бесплатно. Без смс, про реакт, заходи - https://maxpfrontend.ru',
-  },
-];
-
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       passDataBtwComponentsLearnColor: getRandomColor(),
-      news: getModifyArrayWithUniqueIds(myNews),
+      news: null,
+      isLoading: false,
     };
 
     this.updateData = ::this.updateData;
     this.handleAddNews = ::this.handleAddNews;
   }
 
+  static getDerivedStateFromProps(props, state) {
+    /**
+     * для корректной работы метода
+     * нужно возвращать новый state в правильном формате.
+     * всё равно что если написать вместо return
+     * this.setState({filteredNews: props.data})
+     */
+    return {
+      filteredNews: props.data,
+    };
+  }
+
+  componentDidMount() {
+    this.toggleIsLoading(true);
+
+    fetch('/public/news.json')
+      .then((resp => resp.json()))
+      .then((data) => {
+        setTimeout(() => {
+          this.setState({
+            news: getModifyArrayWithUniqueIds(data),
+          });
+
+          this.toggleIsLoading(false);
+        }, 3000);
+      });
+  }
+
+  toggleIsLoading(boolean) {
+    const { isLoading } = this.state;
+    const state = typeof boolean === 'undefined' ? !isLoading : boolean;
+
+    this.setState({
+      isLoading: state,
+    });
+  }
+
   updateData(value) {
     this.setState({
       passDataBtwComponentsLearnColor: value,
-    }, () => {
-      // callback когда новое состояние установилось
     });
   }
 
@@ -57,7 +74,12 @@ class App extends React.Component {
   }
 
   render() {
-    const { passDataBtwComponentsLearnColor, news } = this.state;
+    const { passDataBtwComponentsLearnColor, news, isLoading } = this.state;
+    const loadingTemplate = (
+      <p>
+        Загружаю...
+      </p>
+    );
 
     /**
      * тэг React.Fragment нужен для того,
@@ -70,7 +92,8 @@ class App extends React.Component {
         <Clock updateData={this.updateData} />
         <PassDataBtwComponentsLearn color={passDataBtwComponentsLearnColor} />
         <Add onAddNews={this.handleAddNews} />
-        <News news={news} />
+        {isLoading && loadingTemplate}
+        {Array.isArray(news) && <News news={news} />}
       </React.Fragment>
     );
   }
