@@ -56,3 +56,7 @@ module.exports = {
     }),
   ],
 };
+
+module.exports.serve = {
+  content: [path.join(__dirname, '../public')],
+};

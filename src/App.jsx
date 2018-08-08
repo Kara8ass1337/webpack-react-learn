@@ -35,7 +35,7 @@ class App extends React.Component {
   componentDidMount() {
     this.toggleIsLoading(true);
 
-    fetch('/public/news.json')
+    fetch('/news.json')
       .then((resp => resp.json()))
       .then((data) => {
         setTimeout(() => {
