@@ -6,13 +6,15 @@ export default class Add extends React.Component {
     super(props);
 
     this.state = {
+      author: '',
+      text: '',
       agree: false,
     };
 
-    this.input = React.createRef();
-    this.textarea = React.createRef();
     this.handleClick = ::this.handleClick;
     this.handleCheck = ::this.handleCheck;
+    this.handleChange = ::this.handleChange;
+    this.validate = ::this.validate;
   }
 
   componentDidMount() {
@@ -20,9 +22,11 @@ export default class Add extends React.Component {
   }
 
   handleClick() {
+    const { author, text } = this.state;
+
     const result = `
-    Автор: ${this.input.current.value}
-    Текст новости: ${this.textarea.value}`;
+    Автор: ${author}
+    Текст новости: ${text}`;
 
     alert(result);
   }
@@ -33,21 +37,45 @@ export default class Add extends React.Component {
     });
   }
 
+  handleChange(e) {
+    const { id, value } = e.currentTarget;
+
+    this.setState({
+      [id]: value,
+    });
+  }
+
+  validate() {
+    const { author, text, agree } = this.state;
+
+    return author.trim().length > 0 && text.trim().length > 0 && agree === true;
+  }
+
   render() {
-    const { agree } = this.state;
+    const { author, text } = this.state;
 
     return (
-      <div className={style.add}>
-        <input className={style.author} defaultValue="" placeholder="Автор" ref={this.input} />
-        <textarea className={style.text} defaultValue="" placeholder="Текст новости" ref={this.textarea} />
+      <form className={style.add}>
+        <input
+          id="author"
+          className={style.author}
+          value={author}
+          placeholder="Автор"
+          onChange={this.handleChange} />
+        <textarea
+          id="text"
+          className={style.text}
+          value={text}
+          placeholder="Текст новости"
+          onChange={this.handleChange} />
         <label className={style.checkrule}>
           <input type="checkbox" onChange={this.handleCheck} />
           Я согласен с правилами
         </label>
-        <button type="button" className={style.btn} disabled={!agree} onClick={this.handleClick}>
+        <button type="button" className={style.btn} disabled={!this.validate()} onClick={this.handleClick}>
           Добавить новость
         </button>
-      </div>
+      </form>
     );
   }
 }
