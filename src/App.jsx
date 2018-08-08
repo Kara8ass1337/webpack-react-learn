@@ -2,9 +2,28 @@ import React from 'react';
 import { hot } from 'react-hot-loader';
 import Clock from './components/clock/clock';
 import PassDataBtwComponentsLearn from './components/passDataBtwComponentsLearn/passDataBtwComponentsLearn';
-import { getArrayWithUniqueItems, getRandomColor } from './helpers/helpers';
+import { getModifyArrayWithUniqueIds, getRandomColor } from './helpers/helpers';
 import News from './components/news/news';
 import Add from './components/add/add';
+
+const myNews = [
+  {
+    author: 'Саша Печкин',
+    text: 'В четверг, четвертого числа...',
+  },
+  {
+    author: 'Просто Вася',
+    text: 'Считаю, что $ должен стоить 35 рублей!',
+  },
+  {
+    author: 'Max Frontend',
+    text: 'Прошло 2 года с прошлых учебников, а $ так и не стоит 35',
+  },
+  {
+    author: 'Гость',
+    text: 'Бесплатно. Без смс, про реакт, заходи - https://maxpfrontend.ru',
+  },
+];
 
 class App extends React.Component {
   constructor(props) {
@@ -12,56 +31,28 @@ class App extends React.Component {
 
     this.state = {
       passDataBtwComponentsLearnColor: getRandomColor(),
-      news: {},
+      news: getModifyArrayWithUniqueIds(myNews),
     };
 
     this.updateData = ::this.updateData;
-  }
-
-  componentWillMount() {
-    this.getNews();
+    this.handleAddNews = ::this.handleAddNews;
   }
 
   updateData(value) {
-    const { passDataBtwComponentsLearnColor } = this.state;
-
     this.setState({
-      ...passDataBtwComponentsLearnColor,
       passDataBtwComponentsLearnColor: value,
     }, () => {
       // callback когда новое состояние установилось
     });
   }
 
-  getNews() {
-    const myNews = [
-      {
-        author: 'Саша Печкин',
-        text: 'В четверг, четвертого числа...',
-      },
-      {
-        author: 'Просто Вася',
-        text: 'Считаю, что $ должен стоить 35 рублей!',
-      },
-      {
-        author: 'Max Frontend',
-        text: 'Прошло 2 года с прошлых учебников, а $ так и не стоит 35',
-      },
-      {
-        author: 'Гость',
-        text: 'Бесплатно. Без смс, про реакт, заходи - https://maxpfrontend.ru',
-      },
-    ];
+  handleAddNews(data) {
+    const { news } = this.state;
 
-    const uniqueIds = getArrayWithUniqueItems(myNews.length);
-
-    const myNewsWithUniqueIds = myNews.map((item, index) => ({
-      id: uniqueIds[index],
-      ...item,
-    }));
+    const nextNews = getModifyArrayWithUniqueIds([data, ...news]);
 
     this.setState({
-      news: myNewsWithUniqueIds,
+      news: nextNews,
     });
   }
 
@@ -78,7 +69,7 @@ class App extends React.Component {
       <React.Fragment>
         <Clock updateData={this.updateData} />
         <PassDataBtwComponentsLearn color={passDataBtwComponentsLearnColor} />
-        <Add />
+        <Add onAddNews={this.handleAddNews} />
         <News news={news} />
       </React.Fragment>
     );

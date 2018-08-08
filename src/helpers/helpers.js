@@ -33,7 +33,7 @@ export function getRandomColor() {
 }
 
 export function getArrayWithUniqueItems(length) {
-  if (length < 1) return [];
+  if (length === 0) return [];
 
   const arr = [];
 
@@ -42,4 +42,15 @@ export function getArrayWithUniqueItems(length) {
   }
 
   return [...new Set(arr)];
+}
+
+export function getModifyArrayWithUniqueIds(arr = []) {
+  if (arr.length === 0) return arr;
+
+  const uniqueIds = getArrayWithUniqueItems(arr.length);
+
+  return arr.map((item, index) => ({
+    ...item,
+    id: uniqueIds[index],
+  }));
 }

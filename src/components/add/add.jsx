@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import style from './add.scss';
 
 export default class Add extends React.Component {
@@ -23,12 +24,9 @@ export default class Add extends React.Component {
 
   handleClick() {
     const { author, text } = this.state;
+    const { onAddNews } = this.props;
 
-    const result = `
-    Автор: ${author}
-    Текст новости: ${text}`;
-
-    alert(result);
+    onAddNews({ author, text });
   }
 
   handleCheck(e) {
@@ -79,3 +77,7 @@ export default class Add extends React.Component {
     );
   }
 }
+
+Add.propTypes = {
+  onAddNews: PropTypes.func.isRequired,
+};
